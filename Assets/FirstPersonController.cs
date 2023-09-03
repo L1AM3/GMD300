@@ -32,7 +32,7 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 moveDirection;
 
     private float verticalMovement = 0;
-    private float MaxJumpHeight = 1;
+    //private float MaxJumpHeight = 1;
 
     private void OnEnable()
     {
@@ -79,23 +79,27 @@ public class FirstPersonController : MonoBehaviour
         //Setting move dirction based on first person camera
         moveDirection = FirstPersonCamera.transform.forward * moveValue.y + FirstPersonCamera.transform.right * moveValue.x;
         moveDirection.y = 0;
+        moveDirection.y += verticalMovement;
 
         //Moving character based on camera direction
-        characterController.Move(new Vector3(moveDirection.x, verticalMovement, moveDirection.z));
+        characterController.Move(moveDirection);
 
     }
 
     void ProcessVerticalMovement()
     {
-        bool jumpButtonDown = jumpAction.triggered && jumpAction.ReadValue<float>() > 0;
+        verticalMovement = 0;
 
-        if (jumpButtonDown)
+        //bool jumpButtonDown = jumpAction.triggered && jumpAction.ReadValue<float>() > 0;
+
+        //if (jumpButtonDown)
         {
             //isJumping = true;
 
-            verticalMovement += Mathf.Sqrt(MaxJumpHeight * -2.0f * Physics.gravity.y);
+            //verticalMovement += Mathf.Sqrt(MaxJumpHeight * -2.0f * Physics.gravity.y);
         }
 
+        //Adding gravity
         verticalMovement += Physics.gravity.y * Time.deltaTime;
 
     }
@@ -111,12 +115,6 @@ public class FirstPersonController : MonoBehaviour
         FirstPersonCamera.transform.rotation = Quaternion.Euler(currentRotationAngle);
         currentRotationAngle = new Vector3(Mathf.Clamp(currentRotationAngle.x, -85, 85), currentRotationAngle.y, currentRotationAngle.z);
     }
-
-    void ApplyMovement()
-    {
-
-    }
-
 
     void OnDrawGizmos()
     {
