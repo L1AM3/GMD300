@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,10 +12,10 @@ public class FirstPersonController : MonoBehaviour
     public float SprintSpeed = 9;
     public float RotateSpeed = 2500;
 
-    //bool isJumping = false;
+    private bool isJumping = false;
+    private bool isGrounded = true;
 
     public InputActionAsset CharacterActionAsset;
-
     public Camera FirstPersonCamera;
 
     //Input actions
@@ -32,7 +33,10 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 moveDirection;
 
     private float verticalMovement = 0;
-    //private float MaxJumpHeight = 1;
+    private float MaxJumpHeight = 1;
+    public float GroundCheckRadius = 0.25f;
+    public LayerMask GroundLayer;
+    public Transform GroundCheck;
 
     private void OnEnable()
     {
@@ -71,10 +75,10 @@ public class FirstPersonController : MonoBehaviour
         //Sprint check
         if (sprintAction.IsPressed())
             //Apply sprint speed
-            moveValue = moveAction.ReadValue<Vector2>() * SprintSpeed * Time.deltaTime;
+            moveValue = moveAction.ReadValue<Vector2>() * SprintSpeed;
         else
             //Apply move speed
-            moveValue = moveAction.ReadValue<Vector2>() * MoveSpeed * Time.deltaTime;
+            moveValue = moveAction.ReadValue<Vector2>() * MoveSpeed;
 
         //Setting move dirction based on first person camera
         moveDirection = FirstPersonCamera.transform.forward * moveValue.y + FirstPersonCamera.transform.right * moveValue.x;
@@ -82,26 +86,30 @@ public class FirstPersonController : MonoBehaviour
         moveDirection.y += verticalMovement;
 
         //Moving character based on camera direction
-        characterController.Move(moveDirection);
+        characterController.Move(moveDirection * Time.deltaTime);
 
     }
 
     void ProcessVerticalMovement()
     {
-        verticalMovement = 0;
-
-        //bool jumpButtonDown = jumpAction.triggered && jumpAction.ReadValue<float>() > 0;
-
-        //if (jumpButtonDown)
+        if (characterController.isGrounded && verticalMovement < 0)
         {
-            //isJumping = true;
+            isJumping = false;
+            verticalMovement = 0;
+        }
 
-            //verticalMovement += Mathf.Sqrt(MaxJumpHeight * -2.0f * Physics.gravity.y);
+        bool jumpButtonDown = jumpAction.triggered && jumpAction.ReadValue<float>() > 0;
+        if(jumpButtonDown)
+            Debug.Log(jumpButtonDown);
+
+        if (jumpButtonDown && !isJumping)
+        {
+            isJumping = true;
+            verticalMovement += Mathf.Sqrt(MaxJumpHeight * -2.0f * Physics.gravity.y);
         }
 
         //Adding gravity
         verticalMovement += Physics.gravity.y * Time.deltaTime;
-
     }
 
     void ProcessRotation()
