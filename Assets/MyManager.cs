@@ -6,7 +6,7 @@ public class MyManager : MonoBehaviour
 {
   public static MyManager Instance;
 
-    public int playerScore;
+    public int playerScore = 0;
 
     private void Awake()
     {
@@ -31,6 +31,8 @@ public class MyManager : MonoBehaviour
 
     public void Addscore(int scoreToAdd)
     {
+        scoreToAdd = 1;
         playerScore += scoreToAdd;
+        Debug.Log(playerScore);
     }
 }
