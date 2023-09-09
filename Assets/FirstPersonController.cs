@@ -99,8 +99,8 @@ public class FirstPersonController : MonoBehaviour
         }
 
         bool jumpButtonDown = jumpAction.triggered && jumpAction.ReadValue<float>() > 0;
-        if(jumpButtonDown)
-            Debug.Log(jumpButtonDown);
+        //if(jumpButtonDown)
+            //Debug.Log(jumpButtonDown);
 
         if (jumpButtonDown && !isJumping)
         {
