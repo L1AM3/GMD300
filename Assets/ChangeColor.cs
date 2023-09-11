@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ChangeColor : MonoBehaviour
 {
-    public Color newColor;
+    public Color NewColor;
 
   public void ChangesColor()
     {
-        GetComponent<Light>().color = newColor;
+        //Getting component to change light color of
+        GetComponent<Light>().color = NewColor;
     }
 }

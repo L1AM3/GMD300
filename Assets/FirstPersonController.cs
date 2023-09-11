@@ -10,13 +10,16 @@ public class FirstPersonController : MonoBehaviour
     //Speed values
     public float MoveSpeed = 6;
     public float SprintSpeed = 9;
-    public float RotateSpeed = 2500;
+    public float RotateSpeed = 5;
 
+    //Jumping bools
     private bool isJumping = false;
     private bool isGrounded = true;
 
+    //Movement and camera components
     public InputActionAsset CharacterActionAsset;
     public Camera FirstPersonCamera;
+    private CharacterController characterController;
 
     //Input actions
     private InputAction moveAction;
@@ -24,16 +27,15 @@ public class FirstPersonController : MonoBehaviour
     private InputAction sprintAction;
     private InputAction jumpAction;
 
-    private CharacterController characterController;
-
     //Vector values
     private Vector2 moveValue = Vector2.zero;
     private Vector2 rotateValue = Vector2.zero;
     private Vector3 currentRotationAngle = Vector3.zero;
     private Vector3 moveDirection;
 
+    //Other jump variables
     private float verticalMovement = 0;
-    private float MaxJumpHeight = 1;
+    private float maxJumpHeight = 1;
     public float GroundCheckRadius = 0.25f;
     public LayerMask GroundLayer;
     public Transform GroundCheck;
@@ -105,7 +107,7 @@ public class FirstPersonController : MonoBehaviour
         if (jumpButtonDown && !isJumping)
         {
             isJumping = true;
-            verticalMovement += Mathf.Sqrt(MaxJumpHeight * -2.0f * Physics.gravity.y);
+            verticalMovement += Mathf.Sqrt(maxJumpHeight * -2.0f * Physics.gravity.y);
         }
 
         //Adding gravity

@@ -6,8 +6,10 @@ public class MyManager : MonoBehaviour
 {
   public static MyManager Instance;
 
+    //Varibale to hold amount of collectibles the player has gotten
     public int playerScore = 0;
 
+    //Making sure only one instance of this game manager exists
     private void Awake()
     {
         if (Instance == null)
@@ -29,10 +31,10 @@ public class MyManager : MonoBehaviour
         }         
     }
 
+    //Function for adding score to counter every time player grabs collectible
     public void Addscore(int scoreToAdd)
     {
         scoreToAdd = 1;
         playerScore += scoreToAdd;
-        Debug.Log(playerScore);
     }
 }

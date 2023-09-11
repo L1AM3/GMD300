@@ -6,8 +6,10 @@ using UnityEngine.EventSystems;
 
 public class CollectibleEventSystem : MonoBehaviour
 {
+    //Creating variable to grab information from manager script
     public int ScoreToAdd;
 
+    //Event systems for collectibles
     public UnityEvent CollectibleOne;
     public UnityEvent CollectibleTwo;
     public UnityEvent CollectibleThree;
@@ -16,6 +18,7 @@ public class CollectibleEventSystem : MonoBehaviour
     public UnityEvent CollectibleSix;
     public UnityEvent AllCollectiblesGot;
 
+    //Getting colliders of collectibles
     public Component CollecitbleOneCollider;
     public Component CollecitbleTwoCollider;
     public Component CollecitbleThreeCollider;
@@ -25,6 +28,7 @@ public class CollectibleEventSystem : MonoBehaviour
 
     private void Update()
     {
+        //Checking for if the player has collected all collectibles and then opening door out
         if (MyManager.Instance.playerScore >= 6)
         {
             AllCollectiblesGot.Invoke();
@@ -33,6 +37,7 @@ public class CollectibleEventSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Checking which collectible the player has gotten and setting them inactive and adding score to player's total
         if (other == CollecitbleOneCollider)
         {
             CollectibleOne.Invoke();
