@@ -2,17 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static UIManager Instance;
+
+    private Animator animator;
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(this);
+        }
+
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnDisable()
     {
-        
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
+  
+
+    public void ShowInteractPrompt(bool showPrompt)
+    {
+        animator.SetBool("showInteractionPrompt", showPrompt);
+    }
+
 }
