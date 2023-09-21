@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class cubepwe : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public ParticleSystem explosion;
    public void DESTROY()
     {
+        Instantiate(explosion, transform.position, transform.rotation);
+
         Destroy(this.gameObject);
     }
 }
