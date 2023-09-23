@@ -29,7 +29,7 @@ public class CollectibleEventSystem : MonoBehaviour
     private void Update()
     {
         //Checking for if the player has collected all collectibles and then opening door out
-        if (MyManager.Instance.playerScore >= 6)
+        if (MyManager.playerScore >= 6)
         {
             AllCollectiblesGot.Invoke();
         }

@@ -7,7 +7,7 @@ public class MyManager : MonoBehaviour
   public static MyManager Instance;
 
     //Varibale to hold amount of collectibles the player has gotten
-    public int playerScore = 0;
+    public static int playerScore = 0;
 
     //Making sure only one instance of this game manager exists
     private void Awake()

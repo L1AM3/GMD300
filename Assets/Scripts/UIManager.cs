@@ -37,4 +37,9 @@ public class UIManager : MonoBehaviour
         animator.SetBool("showInteractionPrompt", showPrompt);
     }
 
+    public void ShowKeyUI(bool showKeyUI)
+    {
+        animator.SetBool("showKeyUI", showKeyUI);
+    }
+
 }
