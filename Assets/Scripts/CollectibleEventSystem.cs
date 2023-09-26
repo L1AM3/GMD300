@@ -6,10 +6,13 @@ using UnityEngine.EventSystems;
 
 public class CollectibleEventSystem : MonoBehaviour
 {
+    public CeilingOpenAnimation CeilingOpen;
+    public bool AllKeys = false;
+
     //Creating variable to grab information from manager script
     public int ScoreToAdd;
 
-    public CollectibleUI collectible;
+    public CollectibleUI Collectible;
 
     //Event systems for collectibles
     public UnityEvent CollectibleOne;
@@ -18,7 +21,6 @@ public class CollectibleEventSystem : MonoBehaviour
     public UnityEvent CollectibleFour;
     public UnityEvent CollectibleFive;
     public UnityEvent CollectibleSix;
-    public UnityEvent AllCollectiblesGot;
 
     //Getting colliders of collectibles
     public Component CollecitbleOneCollider;
@@ -33,7 +35,8 @@ public class CollectibleEventSystem : MonoBehaviour
         //Checking for if the player has collected all collectibles and then opening door out
         if (MyManager.playerScore >= 6)
         {
-            AllCollectiblesGot.Invoke();
+            AllKeys = true;
+            CeilingOpen.DoorOpenAnimation(AllKeys);
         }
     }
 
@@ -43,37 +46,37 @@ public class CollectibleEventSystem : MonoBehaviour
         //Checking which collectible the player has gotten and setting them inactive and adding score to player's total
         if (other == CollecitbleOneCollider)
         {
-            collectible.ShowKeyUI(true);
+            Collectible.ShowKeyUI(true);
             CollectibleOne.Invoke();
             MyManager.Instance.Addscore(ScoreToAdd);
         }
         if (other == CollecitbleTwoCollider)
         {
-            collectible.ShowKeyUI(true);
+            Collectible.ShowKeyUI(true);
             CollectibleTwo.Invoke();
             MyManager.Instance.Addscore(ScoreToAdd);
         }
         if (other == CollecitbleThreeCollider)
         {
-            collectible.ShowKeyUI(true);
+            Collectible.ShowKeyUI(true);
             CollectibleThree.Invoke();
             MyManager.Instance.Addscore(ScoreToAdd);
         }
         if (other == CollecitbleFourCollider)
         {
-            collectible.ShowKeyUI(true);
+            Collectible.ShowKeyUI(true);
             CollectibleFour.Invoke();
             MyManager.Instance.Addscore(ScoreToAdd);
         }
         if (other == CollecitbleFiveCollider)
         {
-            collectible.ShowKeyUI(true);
+            Collectible.ShowKeyUI(true);
             CollectibleFive.Invoke();
             MyManager.Instance.Addscore(ScoreToAdd);
         }
         if (other == CollecitbleSixCollider)
         {
-            collectible.ShowKeyUI(true);
+            Collectible.ShowKeyUI(true);
             CollectibleSix.Invoke();
             MyManager.Instance.Addscore(ScoreToAdd);
         }

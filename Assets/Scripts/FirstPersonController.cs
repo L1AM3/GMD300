@@ -14,7 +14,6 @@ public class FirstPersonController : MonoBehaviour
 
     //Jumping bools
     private bool isJumping = false;
-    private bool isGrounded = true;
 
     //Movement and camera components
     public InputActionAsset CharacterActionAsset;
