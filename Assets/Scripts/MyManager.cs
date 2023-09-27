@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MyManager : MonoBehaviour
@@ -41,5 +42,18 @@ public class MyManager : MonoBehaviour
     public int GetPlayerScore()
     {
         return PlayerScore;
+    }
+
+    private void Update()
+    {
+        Quit();
+    }
+
+    public void Quit()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        { 
+            Application.Quit();
+        }
     }
 }
