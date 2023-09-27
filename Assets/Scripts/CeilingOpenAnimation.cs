@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class CeilingOpenAnimation : MonoBehaviour
 {
-    public Animator anim;
+    //variable for an animator
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
-        
+        //getting the animator on the object
+        anim = GetComponent<Animator>();   
     }
 
     public void DoorOpenAnimation(bool AllKeys)
     {
+        //Function for playing the ceiling animation
         anim.SetBool("KeysCollected", AllKeys);
     }
 }

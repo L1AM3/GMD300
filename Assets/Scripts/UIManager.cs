@@ -5,9 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class UIManager : MonoBehaviour
 {
+    //Making UIManger a static
     public static UIManager Instance;
 
+    //variable for an animator
     private Animator animator;
+
     private void Awake()
     {
         if (Instance == null)
@@ -19,6 +22,7 @@ public class UIManager : MonoBehaviour
             Destroy(this);
         }
 
+        //Getting animator off of object
         animator = GetComponent<Animator>();
     }
 
@@ -31,7 +35,7 @@ public class UIManager : MonoBehaviour
         }
     }
   
-
+    //When played sets bool on animator to true and will show prompt
     public void ShowInteractPrompt(bool showPrompt)
     {
         animator.SetBool("showInteractionPrompt", showPrompt);

@@ -5,16 +5,20 @@ using UnityEngine.InputSystem;
 
 public class RaycastInteract : MonoBehaviour
 {
-    public Camera playerCamera;
-    public float distance = 1;
+    //Variables setting up camera and distance from it
+    public Camera PlayerCamera;
+    public float Distance = 1;
 
+    //Variables getting input action stuff
     public InputActionAsset CharacterInputActions;
     public InputAction interactAction;
 
     private void Awake()
     {
+        //Getting the input for interaction
         CharacterInputActions.FindActionMap("Gameplay").FindAction("Interact");
-
+        
+        //Setting it to equal interactAction
         interactAction = CharacterInputActions.FindActionMap("Gameplay").FindAction("Interact");
     }
 
@@ -26,24 +30,29 @@ public class RaycastInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray interactionRay = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        //Setting up Raycast
+        Ray interactionRay = new Ray(PlayerCamera.transform.position, PlayerCamera.transform.forward);
         RaycastHit interactionHitInfo;
         Physics.Raycast(interactionRay, out interactionHitInfo, 1);
 
+        //Setting conditions of bool
         bool interactInputPressed = interactAction.triggered && interactAction.ReadValue<float>() > 0;
 
+        //Normally prompt won't show up
         bool showInteractPrompt = false;
 
-        if (Physics.Raycast(interactionRay, out interactionHitInfo, distance))
+        //Checking if raycast distance conditions are satisfied
+        if (Physics.Raycast(interactionRay, out interactionHitInfo, Distance))
         {
-
+            //Seeing if the object is tagged with interactible
             if (interactionHitInfo.transform.tag == "Interactible")
             {
+                //Showing prompt while looking at raycast object
                 showInteractPrompt = true;
                 if (interactInputPressed)
                 {
+                    //Sending message that it was interacted with
                     interactionHitInfo.transform.SendMessage("OnPlayerInteract", SendMessageOptions.DontRequireReceiver);
-                    Debug.Log("works");
 
                 }
             }
@@ -55,6 +64,6 @@ public class RaycastInteract : MonoBehaviour
     {
         Gizmos.color = Color.blue;
 
-        Gizmos.DrawRay(playerCamera.transform.position, playerCamera.transform.forward);
+        Gizmos.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.forward);
     }
 }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class DoorExplosion : MonoBehaviour
 {
-    public ParticleSystem explosion;
+    //Variable for particle system
+    public ParticleSystem Explosion;
     public void DESTROY()
     {
-        Instantiate(explosion, transform.position, transform.rotation);
+        //Instantiating particle system where door was
+        Instantiate(Explosion, transform.position, transform.rotation);
 
+        //Destroying after explosion
         Destroy(this.gameObject);
     }
 }

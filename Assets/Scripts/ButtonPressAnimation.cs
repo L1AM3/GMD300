@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class ButtonPressAnimation : MonoBehaviour
 {
-    public Animator anim;
+    //variable for an animator
+    public Animator Anim;
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        //getting the animator on the object
+        Anim = GetComponent<Animator>();
     }
 
+    //Function for playing the button animation
     public void ButtonPressAnim(bool ButtonPressed)
     {
-        anim.SetBool("Buttonpressed", ButtonPressed);
+        Anim.SetBool("Buttonpressed", ButtonPressed);
     }
 
+    //Function for undoing the variable for button animation
     public void ButtonPressReset(bool ButtonPressed)
     {
-        anim.SetBool("Buttonpressed", ButtonPressed);
+        Anim.SetBool("Buttonpressed", ButtonPressed);
     }
 
 }

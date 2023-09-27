@@ -51,6 +51,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void Awake()
     {
+        //Acessing character controller 
         characterController = GetComponent<CharacterController>();
 
         //Finding actions
@@ -93,6 +94,7 @@ public class FirstPersonController : MonoBehaviour
 
     void ProcessVerticalMovement()
     {
+        //Checking if player is jumping
         if (characterController.isGrounded && verticalMovement < 0)
         {
             isJumping = false;
@@ -103,6 +105,7 @@ public class FirstPersonController : MonoBehaviour
         //if(jumpButtonDown)
             //Debug.Log(jumpButtonDown);
 
+        //If player isn't jumping make them jump
         if (jumpButtonDown && !isJumping)
         {
             isJumping = true;
@@ -115,7 +118,6 @@ public class FirstPersonController : MonoBehaviour
 
     void ProcessRotation()
     {
-
         //Apply rotate speed
         rotateValue = rotateAction.ReadValue<Vector2>() * RotateSpeed * Time.deltaTime;
 
